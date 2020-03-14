@@ -157,7 +157,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bomberman2D.cpp" />
+    <ClInclude Include="Include\main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
