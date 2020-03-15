@@ -11,9 +11,17 @@ public:
 	void Destroy(sf::RenderWindow* window);
 
 private:
+	// logic
+	int playerIndex;
+	bool keyPress, keyRelease;
+	bool checkMousePressed(sf::Mouse::Button key);
+
+
 	sf::Font* font;
 	sf::Text* textSinglePlayer;
-	Player* player;
+	//Player* player;
+	Player** playerPtr;
+	
 	//Player playerPtr[10];
 };
 
