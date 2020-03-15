@@ -33,9 +33,3 @@ private:
 	State* state;
 
 };
-
-#include<iostream>
-
-int main() {
-	std::cout << "Hi";
-}
