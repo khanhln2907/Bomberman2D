@@ -33,8 +33,4 @@ private:
 	State* state;
 
 };
-<<<<<<< HEAD
-=======
 
-#include<iostream>
->>>>>>> 5aa47aa6f7569a7a0915f227ca40f10d7f2af765
