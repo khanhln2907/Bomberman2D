@@ -2,6 +2,10 @@
 #include "../Include/State_Handler.h"
 #include "Player.h"
 
+#define G 9.81
+#define M 0.2
+#define dt 0.0001
+
 class State_Single_Player : public State
 {
 public:
