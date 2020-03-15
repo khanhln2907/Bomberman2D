@@ -1,5 +1,7 @@
 #pragma once
 #include "../Include/State_Handler.h"
+#include "Player.h"
+
 class State_Single_Player : public State
 {
 public:
@@ -11,5 +13,7 @@ public:
 private:
 	sf::Font* font;
 	sf::Text* textSinglePlayer;
+	Player* player;
+	//Player playerPtr[10];
 };
 

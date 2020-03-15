@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-
 #define STATE_MAIN_MENU 0
 #define STATE_SINGLE_PLAYER 1
 #define STATE_MULTIPLE_PLAYER 2

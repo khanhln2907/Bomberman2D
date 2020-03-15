@@ -1,5 +1,5 @@
 #pragma once
-#include "../Include/State_Handler.h"
+#include <SFML/Graphics.hpp>
 #include <string>
 
 class Entity : public sf::Sprite {
@@ -12,7 +12,11 @@ public:
 	bool CheckCollision(Entity* entity);
 	
 	~Entity();
-private:
+
 	sf::Vector2f* velocity;
+private:
 	sf::Texture* imgHanlder;
+
+protected:
+	
 };
