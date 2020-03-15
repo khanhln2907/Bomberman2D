@@ -1,6 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+
+#define STATE_MAIN_MENU 0
+#define STATE_SINGLE_PLAYER 1
+#define STATE_MULTIPLE_PLAYER 2
+#define STATE_HIGH_SCORE 3
+#define STATE_QUIT 4
+
+
 //class State : Actions inherit by each states used to perform game logic, render and manage memory
 
 class State {
@@ -52,17 +60,23 @@ public:
 	}
 
 	void UpdateGame() {
-		this->state->UpdateGame(this->window); // Pass Window pointer to each State so they can update game logic draw
-		this->state->UpdateScreen(this->window);
+		if (this->state != NULL) {
+			this->state->UpdateGame(this->window); // Pass Window pointer to each State so they can update game logic draw
+			this->state->UpdateScreen(this->window);
+		}
 	}
 
 	void UpdateScreen() {
-		this->window->display(); // Display everything at the end
+		if (this->state != NULL) {
+			this->window->display(); // Display everything at the end
+		}
 	}
 
-	void ExitState() {
-		this->state->Destroy(this->window);
-	}
+	//void ExitState() {
+	//	if (this->state != NULL) {
+	//		this->state->Destroy(this->window);
+	//	}
+	//}
 
 private:
 	sf::RenderWindow* window;

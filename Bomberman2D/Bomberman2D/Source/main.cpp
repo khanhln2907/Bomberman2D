@@ -33,7 +33,7 @@ int main()
 		if (quitGame) window.close();
 	}
 
-	stateHandler.ExitState();
+	//stateHandler.ExitState();
 
 	return 0;
 }
