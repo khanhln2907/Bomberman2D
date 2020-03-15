@@ -27,22 +27,26 @@ private:
 class State_Handler
 {
 public:
-	State_Handler(sf::RenderWindow* window) {
+	State_Handler() {
 		this->state = NULL;
-		this->window = window;
+		this->window = NULL;
+		this->quitGame = false;
 	}
 	~State_Handler() {
 		this->state = NULL;
 		this->window = NULL;
 	}
 
+	void SetWindow(sf::RenderWindow* window) {
+		this->window = window;
+	}
+
 	void SetState(State* newState) {
 		if (this->state != NULL) {
 			this->state->Destroy(this->window); // Destroy old state
-			this->state = NULL;
 		}
-		if (this->state == NULL) {
-			this->state = newState;
+		this->state = newState;
+		if (this->state != NULL) {
 			this->state->Initialize(this->window); // Init new state and pass window ref
 		}
 	}
@@ -63,5 +67,8 @@ public:
 private:
 	sf::RenderWindow* window;
 	State* state;
+	bool quitGame;
 };
 
+extern bool quitGame;
+extern State_Handler stateHandler;
