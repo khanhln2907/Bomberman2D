@@ -25,6 +25,12 @@
     <Filter Include="Source Files\State">
       <UniqueIdentifier>{67bf7b1a-a410-4e4b-b05a-a4cce9f4974f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Object">
+      <UniqueIdentifier>{f4220f69-9911-4c60-872d-8a08626f23af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Object">
+      <UniqueIdentifier>{269dda15-ec9c-401f-ac63-d88c12401538}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\State_Handler.h">
@@ -39,6 +45,12 @@
     <ClInclude Include="Include\State_Single_Player.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Player.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Entity.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\State_Handler.cpp">
@@ -52,6 +64,12 @@
     </ClCompile>
     <ClCompile Include="Source\State_Single_Player.cpp">
       <Filter>Source Files\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Source Files\Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
