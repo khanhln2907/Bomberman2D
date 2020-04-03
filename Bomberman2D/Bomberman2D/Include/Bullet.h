@@ -5,14 +5,14 @@ class Bullet : public Entity
 public:
 	Bullet(sf::Vector2f firePosition, double attackAngle, double velocity);
 	~Bullet();
-	void updateMove();
+	void updateMove(sf::RenderWindow* window);
 
 
 private:
 	double* dt = new double;
-	sf::Vector2f* position;
 	double* velocity;
 	sf::Vector2f* velocityXY;
 	double* direction;
+	sf::Vector2f* position;
 };
 

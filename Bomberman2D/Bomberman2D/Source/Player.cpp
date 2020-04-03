@@ -23,13 +23,13 @@ Player::Player()
 	this->aim->setPosition(this->position.x + this->getGlobalBounds().width, this->position.y + 30);
 
 	// Bullet Management
-	this->bullet = new Bullet * [this->maxBullet];
+	//this->bulletVector = new Bullet * [this->maxBullet];
 }
 
 Player::~Player()
 {
 	delete this->aim;
-	delete this->bullet;
+	//delete this->bulletVector;
 }
 
 void Player::updateAim()
@@ -50,26 +50,32 @@ void Player::updateAim()
 
 void Player::fireBullet()
 {
-	if (this->currentAmountBullet <= this->maxBullet) {
-		this->bullet[this->currentAmountBullet] = new Bullet(sf::Vector2f(this->position.x + this->getGlobalBounds().width, this->position.y + 30), this->aimAngle, this->aimPower);
-		this->currentAmountBullet += 1;
+	if (this->bulletVector.size() <= this->maxBullet) {
+		this->bulletVector.push_back(new Bullet(sf::Vector2f(this->position.x + this->getGlobalBounds().width, this->position.y + 30), this->aimAngle, this->aimPower));
 	}
 	// std::cout << "Bullet Fired" << std::endl;
 }
 
-void Player::updateBullet()
+void Player::updateBullet(sf::RenderWindow* window)
 {
-	for (int i = 0; i < this->currentAmountBullet; i++) {
-		this->bullet[i]->updateMove();
+	for (int i = 0; i < this->bulletVector.size(); i++) {
+		this->bulletVector[i]->updateMove(window);
+		if (this->bulletVector[i]->getPosition().x > window->getSize().x || this->bulletVector[i]->getPosition().y > window->getSize().y 
+		 || this->bulletVector[i]->getPosition().x < 0 || this->bulletVector[i]->getPosition().y < 0) {
+			this->bulletVector[i]->~Bullet();
+			this->bulletVector.erase(this->bulletVector.begin() + i);
+		}
 	}
+	
+	cout << "Amount of Bullet: " << this->bulletVector.size() << endl;
 }
 
 void Player::drawPlayer(sf::RenderWindow* window)
 {
 	this->setPosition(this->position.x, this->position.y);
 	window->draw(*this->aim);
-	for (int i = 0; i < this->currentAmountBullet; i++) {
-		window->draw(*this->bullet[i]);
+	for (int i = 0; i < this->bulletVector.size(); i++) {
+		window->draw(*this->bulletVector[i]);
 	}
 }
 

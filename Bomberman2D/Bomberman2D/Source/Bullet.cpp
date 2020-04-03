@@ -37,7 +37,7 @@ Bullet::~Bullet()
 	delete this->dt;
 }
 
-void Bullet::updateMove()
+void Bullet::updateMove(sf::RenderWindow* window)
 {	
 	this->velocityXY->y +=  G * *this->dt; // vy = vy0 - gt;
 	//cout << "Velocity X: " << this->velocityXY->x << endl;

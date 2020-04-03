@@ -1,16 +1,17 @@
 #include "Entity.h"
 #include "SFML/Graphics.hpp"
 #include "Bullet.h"
+#include <vector>
 
 
-class Player : public Entity {
+class Player : public Entity{
 public:
 	Player();
 	~Player();
 	
 	void updateAim();
 	void fireBullet();
-	void updateBullet();
+	void updateBullet(sf::RenderWindow* window);
 	void drawPlayer(sf::RenderWindow* window);
 
 
@@ -22,9 +23,8 @@ private:
 	double rotateSpeedRad = rotateSpeedDeg * 2 * 3.14 / 360; // Deg;
 
 	int maxBullet = 3;
-	int currentAmountBullet = 0;
 	sf::Vector2f position;
 
-	Bullet** bullet;
+	std::vector<Bullet*> bulletVector;
 	sf::RectangleShape* aim;
 };

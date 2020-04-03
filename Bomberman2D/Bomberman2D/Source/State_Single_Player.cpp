@@ -36,7 +36,7 @@ void State_Single_Player::UpdateGame(sf::RenderWindow* window)
 		this->tank->fireBullet();
 	}
 	
-	this->tank->updateBullet(); // Update Tank Position and Bullet, tank can not move until now
+	this->tank->updateBullet(window); // Update Tank Position and Bullet, tank can not move until now
 
 	// Creat Object when left mouse is pressed;
 	if (this->checkMousePressed(MOUSE_LEFT) && this->playerIndex < 20) {
