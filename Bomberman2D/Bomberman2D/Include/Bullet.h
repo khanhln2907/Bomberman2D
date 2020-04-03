@@ -9,10 +9,11 @@ public:
 
 
 private:
+	double orientationOffset = 3.14 / 4;
 	double* dt = new double;
 	double* velocity;
 	sf::Vector2f* velocityXY;
-	double* direction;
+	double* orientation;
 	sf::Vector2f* position;
 };
 

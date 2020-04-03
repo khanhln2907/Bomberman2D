@@ -18,9 +18,9 @@ public:
 private:
 	double aimAngle;
 	double aimPower = 100;
-	double powerIncrement = 5;
-	double rotateSpeedDeg = 0.05; // Deg;
-	double rotateSpeedRad = rotateSpeedDeg * 2 * 3.14 / 360; // Deg;
+	double powerIncrement = 1;
+	double rotateSpeedDeg = 0.15; // Deg;
+	double rotateSpeedRad = rotateSpeedDeg * 2 * 3.14 / 360; // Rad;
 
 	int maxBullet = 3;
 	sf::Vector2f position;
