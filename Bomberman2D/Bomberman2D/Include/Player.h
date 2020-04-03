@@ -10,14 +10,16 @@ public:
 	
 	void updateAim();
 	void fireBullet();
-	void updatePosition();
+	void updateBullet();
 	void drawPlayer(sf::RenderWindow* window);
 
 
 private:
 	double aimAngle;
-	double aimPower = 0.1;
-	double rotateSpeed = 0.05; // Degree;
+	double aimPower = 100;
+	double powerIncrement = 5;
+	double rotateSpeedDeg = 0.05; // Deg;
+	double rotateSpeedRad = rotateSpeedDeg * 2 * 3.14 / 360; // Deg;
 
 	int maxBullet = 3;
 	int currentAmountBullet = 0;

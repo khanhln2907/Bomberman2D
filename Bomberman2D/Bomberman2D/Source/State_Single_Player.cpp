@@ -11,6 +11,9 @@ void State_Single_Player::Initialize(sf::RenderWindow* window)
 	this->playerIndex = -1;
 	this->keyPress = false;
 	this->keyRelease = true;
+	this->mouseRightPrev = false;
+	this->mouseLeftPrev = false;
+
 
 	// Init Font and Text
 	this->font = new sf::Font();
@@ -27,16 +30,16 @@ void State_Single_Player::Initialize(sf::RenderWindow* window)
 }
 void State_Single_Player::UpdateGame(sf::RenderWindow* window)
 {
-	this->tank->updateAim();
-	if (this->checkMousePressed(sf::Mouse::Button::Right)) {
+	this->tank->updateAim(); // Pointing to target
+	
+	if (this->checkMousePressed(MOUSE_RIGHT)) { // Fire Bullet if Button Is Pressed
 		this->tank->fireBullet();
 	}
-	this->tank->updatePosition(); // Update Tank Position and Bullet
-
-
+	
+	this->tank->updateBullet(); // Update Tank Position and Bullet, tank can not move until now
 
 	// Creat Object when left mouse is pressed;
-	if (this->checkMousePressed(sf::Mouse::Button::Left) && this->playerIndex < 20) {
+	if (this->checkMousePressed(MOUSE_LEFT) && this->playerIndex < 20) {
 		this->playerIndex += 1;
 		float posMouseX = sf::Mouse::getPosition(*window).x;
 		float posMouseY = sf::Mouse::getPosition(*window).y;
@@ -106,17 +109,42 @@ void State_Single_Player::Destroy(sf::RenderWindow* window)
 
 bool State_Single_Player::checkMousePressed(sf::Mouse::Button key)
 {
-	if (sf::Mouse::isButtonPressed(key)) {
-		this->keyPress = true;
-		this->keyRelease = false;
+	switch (key) {
+	case MOUSE_LEFT:
+		if (sf::Mouse::isButtonPressed(MOUSE_LEFT)) {
+			this->mouseLeftPrev = true;
+			return false;
+		}
+		else {
+			if (this->mouseLeftPrev == true) {
+				this->mouseLeftPrev = false;
+				return true;
+			}
+			else {
+				this->mouseLeftPrev = false;
+				return false;
+			}
+		}
+		break;
+	case MOUSE_RIGHT:
+		if (sf::Mouse::isButtonPressed(MOUSE_RIGHT)) {
+			this->mouseRightPrev = true;
+			return false;
+		}
+		else {
+			if (this->mouseRightPrev == true) {
+				this->mouseRightPrev = false;
+				return true;
+			}
+			else {
+				this->mouseRightPrev = false;
+				return false;
+			}
+		}
+		break;
+	default:
+		return false;
+		break;
 	}
-	if (!sf::Mouse::isButtonPressed(key)) {
-		this->keyRelease = true;
-	}
-		
-	if (this->keyPress == true && this->keyRelease == true) {
-		this->keyPress = false;
-		return true;
-	}
-	else return false;
+	
 }

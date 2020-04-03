@@ -7,6 +7,9 @@
 #define M 0.2
 #define dt 0.0001
 
+#define MOUSE_RIGHT sf::Mouse::Button::Right
+#define MOUSE_LEFT sf::Mouse::Button::Left
+
 class State_Single_Player : public State
 {
 public:
@@ -19,6 +22,8 @@ private:
 	// logic
 	int playerIndex;
 	bool keyPress, keyRelease;
+	bool mouseLeftPrev;
+	bool mouseRightPrev;
 	bool checkMousePressed(sf::Mouse::Button key);
 
 

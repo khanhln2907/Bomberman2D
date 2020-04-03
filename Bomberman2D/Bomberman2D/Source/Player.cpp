@@ -9,13 +9,13 @@ Player::Player()
 {
 	// Init
 	this->LoadImage("rocket.png");
-	this->setScale(sf::Vector2f(0.5, 0.5));
+	this->setScale(sf::Vector2f(0.25, 0.25));
 	this->position.x = 50;
-	this->position.y = 600;
+	this->position.y = 800;
 
 	// Aiming
 	this->aimAngle = 0;
-	this->aimPower = 0;
+	this->aimPower = 0.5;
 	this->aim = new sf::RectangleShape;
 	this->aim->setSize(sf::Vector2f(100, 2));
 	//this->aim->setOrigin(0, this->aim->getGlobalBounds().height / 2);
@@ -35,9 +35,17 @@ Player::~Player()
 void Player::updateAim()
 {
 	double direction = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) - sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down);
-	this->aim->rotate(-1 * direction * this->rotateSpeed);
-	this->aimAngle = this->aimAngle + direction * this->rotateSpeed;
-	//std::cout << "Angle: " << this->aimAngle << std::endl;
+	double power = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) - sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left);
+	
+	this->aim->rotate(-1 * direction * this->rotateSpeedDeg);
+	this->aimAngle = this->aimAngle + direction * this->rotateSpeedRad;
+
+	this->aimPower = this->aimPower + power * this->powerIncrement;
+	if (this->aimPower < 100) this->aimPower = 100;
+	if (this->aimPower > 300) this->aimPower = 300;
+
+	//std::cout << "Angle in rad: " << this->aimAngle << std::endl;
+	//std::cout << "Power : " << this->aimPower << std::endl;
 }
 
 void Player::fireBullet()
@@ -46,10 +54,10 @@ void Player::fireBullet()
 		this->bullet[this->currentAmountBullet] = new Bullet(sf::Vector2f(this->position.x + this->getGlobalBounds().width, this->position.y + 30), this->aimAngle, this->aimPower);
 		this->currentAmountBullet += 1;
 	}
-	std::cout << "Bullet Fired" << std::endl;
+	// std::cout << "Bullet Fired" << std::endl;
 }
 
-void Player::updatePosition()
+void Player::updateBullet()
 {
 	for (int i = 0; i < this->currentAmountBullet; i++) {
 		this->bullet[i]->updateMove();
