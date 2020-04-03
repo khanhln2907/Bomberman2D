@@ -157,16 +157,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Bullet.h" />
     <ClInclude Include="Include\Entity.h" />
     <ClInclude Include="Include\main.h" />
+    <ClInclude Include="Include\Object.h" />
     <ClInclude Include="Include\Player.h" />
     <ClInclude Include="Include\State_Handler.h" />
     <ClInclude Include="Include\State_Main_Menu.h" />
     <ClInclude Include="Include\State_Single_Player.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\Entity.cpp" />
     <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Object.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\State_Handler.cpp" />
     <ClCompile Include="Source\State_Main_Menu.cpp" />

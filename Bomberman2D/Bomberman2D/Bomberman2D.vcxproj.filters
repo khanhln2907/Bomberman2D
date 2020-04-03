@@ -45,11 +45,17 @@
     <ClInclude Include="Include\State_Single_Player.h">
       <Filter>Header Files\State</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Entity.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Object.h">
+      <Filter>Header Files\Object</Filter>
+    </ClInclude>
     <ClInclude Include="Include\Player.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Entity.h">
-      <Filter>Header Files\Object</Filter>
+    <ClInclude Include="Include\Bullet.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,8 +74,14 @@
     <ClCompile Include="Source\Entity.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Object.cpp">
+      <Filter>Source Files\Object</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Player.cpp">
       <Filter>Source Files\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bullet.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

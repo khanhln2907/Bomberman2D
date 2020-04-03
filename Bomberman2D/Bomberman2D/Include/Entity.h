@@ -16,6 +16,7 @@ public:
 	sf::Vector2f* velocity;
 private:
 	sf::Texture* imgHanlder;
+	double dt = 0.01;
 
 protected:
 	

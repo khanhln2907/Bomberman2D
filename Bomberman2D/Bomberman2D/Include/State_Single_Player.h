@@ -1,5 +1,6 @@
 #pragma once
 #include "../Include/State_Handler.h"
+#include "Object.h"
 #include "Player.h"
 
 #define G 9.81
@@ -23,9 +24,8 @@ private:
 
 	sf::Font* font;
 	sf::Text* textSinglePlayer;
-	//Player* player;
-	Player** playerPtr;
 	
-	//Player playerPtr[10];
+	Player* tank;
+	Object** target;
 };
 
