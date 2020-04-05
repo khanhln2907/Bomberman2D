@@ -9,6 +9,7 @@
 
 #define MOUSE_RIGHT sf::Mouse::Button::Right
 #define MOUSE_LEFT sf::Mouse::Button::Left
+#define KEY_SPACE sf::Keyboard::Key::Space
 
 class State_Single_Player : public State
 {
@@ -24,7 +25,9 @@ private:
 	int playerIndex;
 	bool mouseLeftPrev;
 	bool mouseRightPrev;
+	bool keySpacePrev;
 	bool checkMousePressed(sf::Mouse::Button key);
+	bool checkKeyPressed(sf::Keyboard::Key key);
 
 	// Level and Map
 	short level;

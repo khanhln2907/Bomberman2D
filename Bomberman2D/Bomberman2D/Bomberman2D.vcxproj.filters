@@ -54,11 +54,11 @@
     <ClInclude Include="Include\Player.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Bullet.h">
-      <Filter>Header Files\Object</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Map.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Bomb.h">
+      <Filter>Header Files\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,7 +83,7 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Bullet.cpp">
+    <ClCompile Include="Source\Bomb.cpp">
       <Filter>Source Files\Object</Filter>
     </ClCompile>
   </ItemGroup>

@@ -5,6 +5,7 @@
 #define PI 3.14
 #define TOL 15
 
+
 using std::cout;
 using std::endl;
 extern const char mapLevel1[MAP_HEIGHT][MAP_WIDTH];
@@ -111,29 +112,23 @@ void Player::updateMove()
 
 void Player::placeBomb()
 {
-	/*if (this->bombVector.size() <= this->maxBullet) {
-		this->bombVector.push_back(new Bullet(sf::Vector2f(this->position.x, this->position.y), this->aimAngle, this->aimPower));
-	}*/
-	// std::cout << "Bullet Fired" << std::endl;
+	if (this->bombVector.size() <= this->maxBomb) {
+		this->bombVector.push_back(new Bomb(sf::Vector2f(this->position.x, this->position.y), 1));
+	}
+	std::cout << "Bomb Created" << std::endl;
 }
 
 void Player::updateBomb(sf::RenderWindow* window)
 {
 	for (int i = 0; i < this->bombVector.size(); i++) {
-		this->bombVector[i]->updateMove(window);
-		if (this->bombVector[i]->getPosition().x > window->getSize().x || this->bombVector[i]->getPosition().y > window->getSize().y 
-		 || this->bombVector[i]->getPosition().x < 0 || this->bombVector[i]->getPosition().y < 0) {
-			this->bombVector[i]->~Bullet();
-			this->bombVector.erase(this->bombVector.begin() + i);
-		}
+		;
 	}
-	
-	//cout << "Amount of Bullet: " << this->bombVector.size() << endl;
+	//cout << "Amount of Bomb: " << this->bombVector.size() << endl;
 }
 
 void Player::updateScreen(sf::RenderWindow* window)
 {
-	// Draw actual player
+	// Draw current player
 	sf::RectangleShape rectangle(sf::Vector2f(SIZE_BLOCK, SIZE_BLOCK));
 	rectangle.setFillColor(sf::Color::Cyan);
 	rectangle.setPosition(this->position.x, this->position.y);
@@ -141,7 +136,7 @@ void Player::updateScreen(sf::RenderWindow* window)
 	
 	// Draw bomb
 	for (int i = 0; i < this->bombVector.size(); i++) {
-		window->draw(*this->bombVector[i]);
+		if(this->bombVector[i]->update(window) == EXPLODED) this->bombVector.erase(this->bombVector.begin() + i);
 	}
 }
 

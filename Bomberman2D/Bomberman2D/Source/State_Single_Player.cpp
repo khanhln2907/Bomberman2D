@@ -39,49 +39,46 @@ void State_Single_Player::Initialize(sf::RenderWindow* window)
 }
 void State_Single_Player::UpdateGame(sf::RenderWindow* window)
 {
-	//this->player->updateAim(); // Pointing to target
-	
-	//if (this->checkMousePressed(MOUSE_RIGHT)) { // Fire Bullet if Button Is Pressed
-	//	this->player->placeBomb();
-	//}
-	
 	this->player->updateMove();
-	this->player->updateBomb(window); // Update Tank Position and Bullet, tank can not move until now
+	if (this->checkKeyPressed(KEY_SPACE)) { // Fire Bullet if Button Is Pressed
+		this->player->placeBomb();
+	}
+	this->player->updateBomb(window); // Player carries Bomb and update it internally
 
 	// Creat Object when left mouse is pressed;
-	if (this->checkMousePressed(MOUSE_LEFT) && this->playerIndex < 20) {
-		this->playerIndex += 1;
-		float posMouseX = sf::Mouse::getPosition(*window).x;
-		float posMouseY = sf::Mouse::getPosition(*window).y;
+	//if (this->checkMousePressed(MOUSE_LEFT) && this->playerIndex < 20) {
+	//	this->playerIndex += 1;
+	//	float posMouseX = sf::Mouse::getPosition(*window).x;
+	//	float posMouseY = sf::Mouse::getPosition(*window).y;
 
-		this->target[this->playerIndex] = new Object;
-		this->target[this->playerIndex]->LoadImage("ball.png");
-		this->target[this->playerIndex]->setPosition(posMouseX, posMouseY);
+	//	this->target[this->playerIndex] = new Object;
+	//	this->target[this->playerIndex]->LoadImage("ball.png");
+	//	this->target[this->playerIndex]->setPosition(posMouseX, posMouseY);
 
-		//cout << "Real Mouse X Y " << this->target[this->playerIndex]->getPosition().x << " " << this->target[this->playerIndex]->getPosition().y << endl;
-		//cout << "Pos Mouse X Y " << posMouseX << " " << posMouseY << endl;
+	//	//cout << "Real Mouse X Y " << this->target[this->playerIndex]->getPosition().x << " " << this->target[this->playerIndex]->getPosition().y << endl;
+	//	//cout << "Pos Mouse X Y " << posMouseX << " " << posMouseY << endl;
 
-		
-		// Set up new object
-		this->target[this->playerIndex]->velocity->y = 0;
-	}
+	//	
+	//	// Set up new object
+	//	this->target[this->playerIndex]->velocity->y = 0;
+	//}
 
-	if (this->playerIndex >= 0)
-	{
-		for (int i = 0; i <= this->playerIndex; i++) {
-			// Action of object here
-			this->target[i]->velocity->y = this->target[i]->velocity->y + dt * G;
-			if (this->target[i]->getPosition().y + this->target[i]->getGlobalBounds().height >= SCREEN_HEIGHT)
-				this->target[i]->velocity->y = this->target[i]->velocity->y * -1 + 0.05;
-		
-			if (this->target[i]->getPosition().y + this->target[i]->getGlobalBounds().height > SCREEN_HEIGHT+1) {
-				this->target[i]->setPosition(this->target[i]->getPosition().x, SCREEN_HEIGHT - this->target[i]->getGlobalBounds().height);
-				this->target[i]->velocity->y = 0;
-			}
+	//if (this->playerIndex >= 0)
+	//{
+	//	for (int i = 0; i <= this->playerIndex; i++) {
+	//		// Action of object here
+	//		this->target[i]->velocity->y = this->target[i]->velocity->y + dt * G;
+	//		if (this->target[i]->getPosition().y + this->target[i]->getGlobalBounds().height >= SCREEN_HEIGHT)
+	//			this->target[i]->velocity->y = this->target[i]->velocity->y * -1 + 0.05;
+	//	
+	//		if (this->target[i]->getPosition().y + this->target[i]->getGlobalBounds().height > SCREEN_HEIGHT+1) {
+	//			this->target[i]->setPosition(this->target[i]->getPosition().x, SCREEN_HEIGHT - this->target[i]->getGlobalBounds().height);
+	//			this->target[i]->velocity->y = 0;
+	//		}
 
-			this->target[i]->move(0, this->target[i]->velocity->y);
-		}
-	}
+	//		this->target[i]->move(0, this->target[i]->velocity->y);
+	//	}
+	//}
 
 	// Movement Logic
 
@@ -97,14 +94,8 @@ void State_Single_Player::UpdateScreen(sf::RenderWindow* window)
 {
 	window->clear(sf::Color::Black);
 	this->DrawMap(window);
-	//window->draw(*this->map);
-	window->draw(*this->textSinglePlayer);
-	//window->draw(*this->tank);
 	this->player->updateScreen(window);
-	//window->draw(*this->player);
-	for (int i = 0; i <= this->playerIndex; i++) {
-		window->draw(*this->target[i]);
-	}
+	window->draw(*this->textSinglePlayer);
 }
 void State_Single_Player::DrawMap(sf::RenderWindow* window)
 {
@@ -172,4 +163,30 @@ bool State_Single_Player::checkMousePressed(sf::Mouse::Button key)
 		break;
 	}
 	
+}
+
+bool State_Single_Player::checkKeyPressed(sf::Keyboard::Key key)
+{
+	switch (key) {
+	case KEY_SPACE:
+		if (sf::Keyboard::isKeyPressed(KEY_SPACE)) {
+			this->keySpacePrev = true;
+			return false;
+		}
+		else {
+			if (this->keySpacePrev == true) {
+				this->keySpacePrev = false;
+				return true;
+			}
+			else {
+				this->keySpacePrev = false;
+				return false;
+			}
+		}
+		break;
+
+	default:
+		return false;
+		break;
+	}
 }

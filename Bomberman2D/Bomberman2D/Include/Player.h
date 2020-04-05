@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.h"
-#include "Bullet.h"
+#include "Bomb.h"
 
 #define NO_MOVE 0
 #define MOVE_VERTICAL 1
@@ -20,8 +20,8 @@ public:
 private:
 	short prevMove;
 
-	int maxBullet = 3;
+	int maxBomb = 5;
 	sf::Vector2f position;
 
-	std::vector<Bullet*> bombVector;
+	std::vector<Bomb*> bombVector;
 };
