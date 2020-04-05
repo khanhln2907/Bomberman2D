@@ -5,7 +5,7 @@
 using std::cout;
 using std::endl;
 
-#define G 9.81
+sf::Vector2f getCorrectBombPosition(sf::Vector2f bombPosition);
 
 Bomb::Bomb(sf::Vector2f bombPosition, double length)
 {
@@ -15,7 +15,7 @@ Bomb::Bomb(sf::Vector2f bombPosition, double length)
 	this->position = new sf::Vector2f;
 	this->length = new double(length);
 
-	*this->position = bombPosition;
+	*this->position = getCorrectBombPosition(bombPosition);
 	this->explodedTime = new double(3.0); // Second
 	this->deleteTime = new double(3.5);
 	this->timer = new sf::Clock;
@@ -65,3 +65,12 @@ void Bomb::explode(sf::RenderWindow* window)
 
 }
 
+sf::Vector2f  getCorrectBombPosition(sf::Vector2f bombPosition) {
+	sf::Vector2f correctPosition;
+	double cntBlockX = (double)(((int)(bombPosition.x) - MAP_OFFSET_X)) / (double)(SIZE_BLOCK);
+	double cntBlockY = (double)(((int)(bombPosition.y) - MAP_OFFSET_Y)) / (double)(SIZE_BLOCK);
+
+	correctPosition.x = (int)round(cntBlockX) * SIZE_BLOCK + MAP_OFFSET_X;
+	correctPosition.y = (int)round(cntBlockY) * SIZE_BLOCK + MAP_OFFSET_Y;
+	return correctPosition;
+}

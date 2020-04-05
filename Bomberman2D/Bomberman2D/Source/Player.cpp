@@ -87,15 +87,18 @@ void Player::updateMove()
 	// Update Movement
 	if (directionVertical) {
 		this->position.y += directionVertical;
+		(directionVertical >= 0) ? this->moveVer = MOVE_DOWN : MOVE_UP;
 		this->prevMove = MOVE_VERTICAL;
-		cout << "Move Vetical" << endl;
+		//cout << "Move Vetical" << endl;
 	}
 	else if (directionHorizon) {
 		this->position.x += directionHorizon;
+		(directionHorizon >= 0) ? this->moveVer = MOVE_RIGHT : MOVE_LEFT;
 		this->prevMove = MOVE_HORIZON;
-		cout << "Move Horizon" << endl;
+		//cout << "Move Horizon" << endl;
 	}
 	else {
+		this->moveVer = NO_MOVE;
 		this->prevMove = NO_MOVE;
 	}
 
@@ -113,7 +116,7 @@ void Player::updateMove()
 void Player::placeBomb()
 {
 	if (this->bombVector.size() <= this->maxBomb) {
-		this->bombVector.push_back(new Bomb(sf::Vector2f(this->position.x, this->position.y), 1));
+		this->bombVector.push_back(new Bomb(sf::Vector2f(this->position.x + this->moveHor * BOMB_OFFSET, this->position.y + this->moveVer * BOMB_OFFSET), 1));
 	}
 	std::cout << "Bomb Created" << std::endl;
 }
