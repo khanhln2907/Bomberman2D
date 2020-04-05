@@ -33,7 +33,7 @@ int main()
 
 		//Screen Output
 		sf::Time endTimeOfLoop = clock.getElapsedTime();
-		if(endTimeOfLoop.asMilliseconds() != 0) std::cout << "Refresh Rate: " << 1.0 / (double)endTimeOfLoop.asMilliseconds() * 1000 << " Hz" << std::endl;
+		//if(endTimeOfLoop.asMilliseconds() != 0) std::cout << "Refresh Rate: " << 1.0 / (double)endTimeOfLoop.asMilliseconds() * 1000 << " Hz" << std::endl;
 		sf::Time startTimeOfLoop = clock.restart();
 		stateHandler.UpdateScreen();
 
@@ -41,6 +41,5 @@ int main()
 	}
 
 	//stateHandler.ExitState();
-
 	return 0;
 }

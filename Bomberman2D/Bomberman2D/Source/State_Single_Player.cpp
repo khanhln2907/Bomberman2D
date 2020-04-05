@@ -25,26 +25,28 @@ void State_Single_Player::Initialize(sf::RenderWindow* window)
 	this->textSinglePlayer = new sf::Text(textBuffer, *this->font, 30U);
 	//this->textSinglePlayer->setOrigin(this->textSinglePlayer->getGlobalBounds().width / 2, this->textSinglePlayer->getGlobalBounds().height / 2);
 	this->textSinglePlayer->setFillColor(sf::Color::White);
-	this->textSinglePlayer->setPosition(10, 0);
+	this->textSinglePlayer->setPosition(10, 10);
 	
 	// Memory for object;
 	this->map = new Entity();
 	this->map->LoadImage("Map.jpg");
 	this->map->setScale(MAP_WIDTH_SCALE, MAP_HEIGHT_SCALE);
 	this->map->setPosition(MAP_OFFSET_X, MAP_OFFSET_Y);
-	this->tank = new Player;
+	
+	this->player = new Player;
 	this->target = new Object * [20];
 	
 }
 void State_Single_Player::UpdateGame(sf::RenderWindow* window)
 {
-	this->tank->updateAim(); // Pointing to target
+	//this->player->updateAim(); // Pointing to target
 	
-	if (this->checkMousePressed(MOUSE_RIGHT)) { // Fire Bullet if Button Is Pressed
-		this->tank->fireBullet();
-	}
+	//if (this->checkMousePressed(MOUSE_RIGHT)) { // Fire Bullet if Button Is Pressed
+	//	this->player->placeBomb();
+	//}
 	
-	this->tank->updateBullet(window); // Update Tank Position and Bullet, tank can not move until now
+	this->player->updateMove();
+	this->player->updateBomb(window); // Update Tank Position and Bullet, tank can not move until now
 
 	// Creat Object when left mouse is pressed;
 	if (this->checkMousePressed(MOUSE_LEFT) && this->playerIndex < 20) {
@@ -56,8 +58,8 @@ void State_Single_Player::UpdateGame(sf::RenderWindow* window)
 		this->target[this->playerIndex]->LoadImage("ball.png");
 		this->target[this->playerIndex]->setPosition(posMouseX, posMouseY);
 
-		cout << "Real Mouse X Y " << this->target[this->playerIndex]->getPosition().x << " " << this->target[this->playerIndex]->getPosition().y << endl;
-		cout << "Pos Mouse X Y " << posMouseX << " " << posMouseY << endl;
+		//cout << "Real Mouse X Y " << this->target[this->playerIndex]->getPosition().x << " " << this->target[this->playerIndex]->getPosition().y << endl;
+		//cout << "Pos Mouse X Y " << posMouseX << " " << posMouseY << endl;
 
 		
 		// Set up new object
@@ -98,7 +100,7 @@ void State_Single_Player::UpdateScreen(sf::RenderWindow* window)
 	//window->draw(*this->map);
 	window->draw(*this->textSinglePlayer);
 	//window->draw(*this->tank);
-	//this->tank->drawPlayer(window);
+	this->player->updateScreen(window);
 	//window->draw(*this->player);
 	for (int i = 0; i <= this->playerIndex; i++) {
 		window->draw(*this->target[i]);
@@ -111,8 +113,8 @@ void State_Single_Player::DrawMap(sf::RenderWindow* window)
 			if (mapLevel1[j][i] == '|') {
 				sf::RectangleShape rectangle(sf::Vector2f(SIZE_BLOCK, SIZE_BLOCK));
 				rectangle.setFillColor(sf::Color::White);
-				rectangle.setOrigin(rectangle.getGlobalBounds().width / 2, rectangle.getGlobalBounds().height / 2);
-				rectangle.setPosition((i + 1) * SIZE_BLOCK + MAP_OFFSET_X, (j + 1) * SIZE_BLOCK + MAP_OFFSET_Y);
+				//rectangle.setOrigin(rectangle.getGlobalBounds().width / 2, rectangle.getGlobalBounds().height / 2);
+				rectangle.setPosition((i) * SIZE_BLOCK + MAP_OFFSET_X, (j) * SIZE_BLOCK + MAP_OFFSET_Y);
 				window->draw(rectangle);
 			}
 		}
@@ -122,7 +124,7 @@ void State_Single_Player::Destroy(sf::RenderWindow* window)
 {
 	delete this->font;
 	delete this->textSinglePlayer;
-	delete this->tank;
+	delete this->player;
 	//elete this->player;
 	for (int i = 0; i < this->playerIndex; i++) {
 		delete this->target[i];

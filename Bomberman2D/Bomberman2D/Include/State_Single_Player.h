@@ -33,7 +33,7 @@ private:
 	sf::Text* textSinglePlayer;
 	
 	Entity* map;
-	Player* tank;
+	Player* player;
 	Object** target;
 };
 

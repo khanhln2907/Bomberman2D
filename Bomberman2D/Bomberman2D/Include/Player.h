@@ -2,27 +2,26 @@
 #include "Entity.h"
 #include "Bullet.h"
 
+#define NO_MOVE 0
+#define MOVE_VERTICAL 1
+#define MOVE_HORIZON 2
+
 class Player : public Entity{
 public:
 	Player();
 	~Player();
 	
-	void updateAim();
-	void fireBullet();
-	void updateBullet(sf::RenderWindow* window);
-	void drawPlayer(sf::RenderWindow* window);
+	void placeBomb();
+	void updateMove();
+	void updateBomb(sf::RenderWindow* window);
+	void updateScreen(sf::RenderWindow* window);
 
 
 private:
-	double aimAngle;
-	double aimPower = 100;
-	double powerIncrement = 1;
-	double rotateSpeedDeg = 0.15; // Deg;
-	double rotateSpeedRad = rotateSpeedDeg * 2 * 3.14 / 360; // Rad;
+	short prevMove;
 
 	int maxBullet = 3;
 	sf::Vector2f position;
 
-	std::vector<Bullet*> bulletVector;
-	sf::RectangleShape* aim;
+	std::vector<Bullet*> bombVector;
 };
