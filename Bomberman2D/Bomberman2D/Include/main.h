@@ -1,5 +1,10 @@
 #pragma once
-#define SCREEN_HEIGHT 900
-#define SCREEN_WIDTH 1200
+#include <iostream>
+
+using std::cout;
+using std::endl;
+
+#define SCREEN_HEIGHT 800
+#define SCREEN_WIDTH 1000
 
 

@@ -1,13 +1,16 @@
 #include "../Include/main.h"
 #include "../Include/State_Handler.h"
 #include "../include/State_Main_Menu.h";
+#include <string>
 
+using std::string;
 State_Handler stateHandler;
 bool quitGame = false;
 
 int main()
 {
 	// Init Setup
+	sf::Clock clock;
 	sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Bomberman");
 	stateHandler.SetWindow(&window);
 	stateHandler.SetState(new Main_Menu());
@@ -17,6 +20,7 @@ int main()
 	{
 		// check all the window's events that were triggered since the last iteration of the loop
 		sf::Event event;
+		
 		while (window.pollEvent(event))
 		{
 			// "close requested" event: we close the window
@@ -28,6 +32,9 @@ int main()
 		stateHandler.UpdateGame();
 
 		//Screen Output
+		sf::Time endTimeOfLoop = clock.getElapsedTime();
+		if(endTimeOfLoop.asMilliseconds() != 0) std::cout << "Refresh Rate: " << 1.0 / (double)endTimeOfLoop.asMilliseconds() * 1000 << " Hz" << std::endl;
+		sf::Time startTimeOfLoop = clock.restart();
 		stateHandler.UpdateScreen();
 
 		if (quitGame) window.close();

@@ -1,6 +1,5 @@
 #include "../Include/Player.h"
 #include "..//Include/main.h"
-#include<iostream>
 
 #define PI 3.14
 using std::cout;

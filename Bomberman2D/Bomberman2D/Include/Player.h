@@ -1,8 +1,6 @@
+#pragma once
 #include "Entity.h"
-#include "SFML/Graphics.hpp"
 #include "Bullet.h"
-#include <vector>
-
 
 class Player : public Entity{
 public:

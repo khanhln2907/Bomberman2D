@@ -16,20 +16,23 @@ public:
 	void Initialize(sf::RenderWindow* window);
 	void UpdateGame(sf::RenderWindow* window);
 	void UpdateScreen(sf::RenderWindow* window);
+	void DrawMap(sf::RenderWindow* window);
 	void Destroy(sf::RenderWindow* window);
 
 private:
 	// logic
 	int playerIndex;
-	bool keyPress, keyRelease;
 	bool mouseLeftPrev;
 	bool mouseRightPrev;
 	bool checkMousePressed(sf::Mouse::Button key);
 
+	// Level and Map
+	short level;
 
 	sf::Font* font;
 	sf::Text* textSinglePlayer;
 	
+	Entity* map;
 	Player* tank;
 	Object** target;
 };

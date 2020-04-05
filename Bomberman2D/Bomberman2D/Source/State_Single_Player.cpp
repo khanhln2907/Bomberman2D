@@ -1,29 +1,37 @@
 #include "../Include/State_Single_Player.h"
 #include "../Include/State_Main_Menu.h"
-#include "..//Include/main.h"
-#include <iostream>
+#include"../Include/main.h"
+#include "../Include/Map.h"
+#include <string.h>
+
 using std::cout;
 using std::endl;
-
+using std::string;
+extern const char mapLevel1[MAP_HEIGHT][MAP_WIDTH];
 
 void State_Single_Player::Initialize(sf::RenderWindow* window)
 {
 	this->playerIndex = -1;
-	this->keyPress = false;
-	this->keyRelease = true;
 	this->mouseRightPrev = false;
 	this->mouseLeftPrev = false;
-
+	this->level = 1;
 
 	// Init Font and Text
 	this->font = new sf::Font();
 	this->font->loadFromFile("Resource/Fonts/font.ttf");
 
-	this->textSinglePlayer = new sf::Text("Playing", *this->font, 30U);
+	char textBuffer[100];
+	sprintf_s(textBuffer, "Level %d", this->level);
+	this->textSinglePlayer = new sf::Text(textBuffer, *this->font, 30U);
 	//this->textSinglePlayer->setOrigin(this->textSinglePlayer->getGlobalBounds().width / 2, this->textSinglePlayer->getGlobalBounds().height / 2);
-	this->textSinglePlayer->setPosition(0, 0);
+	this->textSinglePlayer->setFillColor(sf::Color::White);
+	this->textSinglePlayer->setPosition(10, 0);
 	
 	// Memory for object;
+	this->map = new Entity();
+	this->map->LoadImage("Map.jpg");
+	this->map->setScale(MAP_WIDTH_SCALE, MAP_HEIGHT_SCALE);
+	this->map->setPosition(MAP_OFFSET_X, MAP_OFFSET_Y);
 	this->tank = new Player;
 	this->target = new Object * [20];
 	
@@ -72,8 +80,7 @@ void State_Single_Player::UpdateGame(sf::RenderWindow* window)
 			this->target[i]->move(0, this->target[i]->velocity->y);
 		}
 	}
-	
-	
+
 	// Movement Logic
 
 
@@ -86,13 +93,29 @@ void State_Single_Player::UpdateGame(sf::RenderWindow* window)
 }
 void State_Single_Player::UpdateScreen(sf::RenderWindow* window)
 {
-	window->clear(sf::Color::White);
+	window->clear(sf::Color::Black);
+	this->DrawMap(window);
+	//window->draw(*this->map);
 	window->draw(*this->textSinglePlayer);
-	window->draw(*this->tank);
-	tank->drawPlayer(window);
+	//window->draw(*this->tank);
+	//this->tank->drawPlayer(window);
 	//window->draw(*this->player);
 	for (int i = 0; i <= this->playerIndex; i++) {
 		window->draw(*this->target[i]);
+	}
+}
+void State_Single_Player::DrawMap(sf::RenderWindow* window)
+{
+	for (int i = 0; i < MAP_WIDTH; i++) {
+		for (int j = 0; j < MAP_HEIGHT; j++) {
+			if (mapLevel1[j][i] == '|') {
+				sf::RectangleShape rectangle(sf::Vector2f(SIZE_BLOCK, SIZE_BLOCK));
+				rectangle.setFillColor(sf::Color::White);
+				rectangle.setOrigin(rectangle.getGlobalBounds().width / 2, rectangle.getGlobalBounds().height / 2);
+				rectangle.setPosition((i + 1) * SIZE_BLOCK + MAP_OFFSET_X, (j + 1) * SIZE_BLOCK + MAP_OFFSET_Y);
+				window->draw(rectangle);
+			}
+		}
 	}
 }
 void State_Single_Player::Destroy(sf::RenderWindow* window)

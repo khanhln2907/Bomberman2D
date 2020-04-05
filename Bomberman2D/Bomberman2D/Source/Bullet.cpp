@@ -1,6 +1,5 @@
 #include "../Include/Bullet.h"
 #include "../Include/main.h"
-#include <iostream>
 
 using std::cout;
 using std::endl;

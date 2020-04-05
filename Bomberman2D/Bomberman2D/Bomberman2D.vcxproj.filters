@@ -57,6 +57,9 @@
     <ClInclude Include="Include\Bullet.h">
       <Filter>Header Files\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Map.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\State_Handler.cpp">

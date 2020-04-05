@@ -160,6 +160,7 @@
     <ClInclude Include="Include\Bullet.h" />
     <ClInclude Include="Include\Entity.h" />
     <ClInclude Include="Include\main.h" />
+    <ClInclude Include="Include\Map.h" />
     <ClInclude Include="Include\Object.h" />
     <ClInclude Include="Include\Player.h" />
     <ClInclude Include="Include\State_Handler.h" />
